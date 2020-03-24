@@ -1,0 +1,62 @@
+
+        
+        <!--           MAIN CONTENTE      -->
+        <div class="main" ng-controller="AdressController">
+          <h2>Adress</h2>
+          <form name="myform">
+            
+            <div class="form-group" >
+              <label >Country:</label>
+              <select  ng-model="form.Country" ng-options="x.CountryName for x in contries" class="form-control" required/>
+                <option></option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Adress 1:</label>
+              <input type="text" class="form-control" ng-model="form.Adress1" placeholder="Adress" required />
+            </div>
+            <div class="form-group">
+              <label>Adress 2:</label>
+              <input type="text" class="form-control" ng-model="form.Adress2"  placeholder="Adress"  />
+            </div>
+            <div class="form-group">
+              <label >City:</label>
+              <input type="text" class="form-control" ng-model="form.City" placeholder="City" required />
+            </div>
+        
+              <div class="form-group" ng-show="form.Country.CountryName=='United States'">
+                <label >State:</label>
+                <select  ng-model="form.State"   ng-options="x.Name for x in state" class="form-control"  ng-required="form.Country.CountryName=='United States'" />
+                  <option></option>
+                </select>
+              </div>
+        
+              <div class="form-inline" ng-show="form.Country.CountryName=='United States'">
+                <div class="form-group">
+                  <label >Zip Code:</label>
+                  <input ng-model="form.ZipCode" type="text" placeholder="Zipe Code" class="form-control" ng-required="form.Country.CountryName=='United States'" />
+                  <input ng-model="form.ZipCodeExtension" type="text" placeholder="Zipe Code Extension" class="form-control" ng-required="form.Country.CountryName=='United States'" />
+                </div>
+              </div>
+        
+              <div class="form-group" ng-show="form.Country.CountryName!='United States'">
+                <label >Province:</label>
+                <input type="text" ng-model="form.Providence" class="form-control" placeholder="Province" ng-required="form.Country.CountryName!='United States'">
+              </div>
+        
+              <div class="form-group" ng-show="form.Country.CountryName!='United States'">
+                <label >Postal Code:</label>
+                <input type="text" class="form-control" ng-model="form.PostalCode" placeholder="Postal Code" ng-required="form.Country.CountryName!='United States'">
+              </div>
+              <div class="PagerContainer">
+                <div class="w3-bar">
+                  <button ng-click=prev() formnovalidate="formnovalidate" class="w3-button w3-left w3-light-grey">&laquo; Previous</button>
+                  <button ng-click="myform.$valid && next()" class="w3-button w3-right w3-green">Next &raquo;</button>
+                </div>
+               </div>
+          </form>
+          
+        </div>
+        <p ng-show="visible">{{respuesta}} </p>
+         <!--           MAIN CONTENTE      -->
+

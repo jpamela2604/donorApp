@@ -1,0 +1,47 @@
+
+        <!--           MAIN CONTENTE      -->
+        <form >
+        <div class="main" ng-controller="CardController">
+          <h2>{{PaymentTypeLabel}}</h2>      
+          
+            <div class="form-group">
+              <label >Card Type:</label>
+              <select ng-model="form.CreditCard" ng-options="x.description for x in CreditCardTypeList" class="form-control" required/>
+                <option></option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Card Number:</label>
+              <input type="number"  id="CardNumber" ng-model="form.CardNumber" class="form-control"  placeholder="Card Number" required />
+            </div>
+            <div class="form-group">
+              <label >Card Verification Number:</label>
+              <input type="number"  id="VerificationNumber" ng-model="form.VerificationNumber" class="form-control" placeholder="Card Verification Number" required/>
+              <small   class="form-text text-muted">what is this?</small>
+            </div>
+            <div class="form-group">
+              <label >Name on Card:</label>
+              <input type="text" id="Name" ng-model="form.Name"  class="form-control"  placeholder="Name on Card" required/>
+            </div>
+            <div class="form-group">
+              <label >Expiration Date:</label>
+              <input type="month" class="form-control"  id='txtDate' ng-model="form.ExpirationDate"  required/>              
+            </div>
+            <div class="form-group">
+              <label >Contact Email Adress:</label>
+              <input type="email" class="form-control" ng-model="form.EmailAdress" id="email" placeholder="Contact Email Adress" name="email"/>
+              <p ng-show="visible">{{respuesta}} </p>
+            </div>          
+            
+        </div>
+        <div class="PagerContainer">
+          <div class="w3-bar">
+            <button ng-click=prev() formnovalidate="formnovalidate" class="w3-button w3-left w3-light-grey">&laquo; Previous</button>
+            <button ng-click="next()" class="w3-button w3-right w3-green">Next &raquo;</button>
+          </div>
+         </div>
+      </form>
+         <!--           MAIN CONTENTE      -->
+
+
+    

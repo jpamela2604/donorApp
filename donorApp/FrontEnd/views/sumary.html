@@ -1,0 +1,79 @@
+<!--           MAIN CONTENTE      -->
+<form name="myform">
+    <div class="main" >
+        <div class="myform">
+            
+            <h2>Payment Details</h2>
+
+            <div class="text-right mb-3">
+                <a  class="btn btn-primary" ng-click="EditPayment()">Edit</a>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                 <div class="row">
+                     <div class="col-md-4 col-md-offset-2 text-right">
+                     <strong>STATUS:</strong>  
+                     </div>
+                     <div class="col-md-4 text-left">
+                       PENDING
+                     </div>
+                 </div> 
+                 <div class="row">
+                     <div class="col-md-4  col-md-offset-2 text-right">
+                      <strong>PAYMENT TYPE:</strong> 
+                      </div>
+                      <div class="col-md-4 text-left">
+                      {{form.PaymentType}}
+                      </div>
+                 </div> 
+                 <div class="row">
+                     <div class="col-md-4 col-md-offset-2 text-right">
+                      <strong>PLEDGE:</strong> 
+                      </div>
+                      <div class="col-md-4 text-left">
+                      {{form.checkAmount}}
+                      </div>
+                 </div> 
+                 <div class="row">
+                  <div class="col-md-4 col-md-offset-2 text-right">
+                    <strong>TOTAL ANNUAL AMOUNT:</strong>T
+                   </div>
+                   <div class="col-md-4 text-left">
+                     {{form.TotalAnnualAmount}}
+                   </div>
+                </div>
+              </div>
+         </div>
+            
+            <h2>Charity Details</h2>
+            <div class="text-right mb-3">
+              <a href="#" class="btn btn-primary" ng-click="EditCharity()">Edit</a>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-body">                
+                
+                 <div class="row">
+                  <div class="col-md-4 col-md-offset-2 text-right">
+                    <strong>Agency:</strong>
+                   </div>
+                   <div class="col-md-4 text-left">
+                     {{form.Agency.ProfileOrganizationNumber}},{{form.Agency.Address1}}
+                   </div>
+                </div>
+              </div>
+         </div>
+           <br>
+           <p ng-show="visible">{{respuesta}} </p>
+           <br>
+  
+           <ul class="pager">
+            <li class="previous"><a ng-click=prev() >Previous</a></li>
+            <li class="next"><a ng-click="Finish()" type="submit">Finish</a></li>
+          </ul>
+          
+        </div>
+    </div>
+   
+  </form>
+  
+  <!--           MAIN CONTENTE      -->

@@ -1,0 +1,36 @@
+<!--           MAIN CONTENTE      -->
+<form name="myform" ng-controller="AgencyController">
+    <div class="main" >
+        <h2>{{PanelTitle}}</h2>
+        <br>
+        <div class="myform">
+            <!--- amount -->
+
+            <div >
+              <div class="list">
+                <span ng-repeat="agencia in Agencias"  ng-model="form.Agency">
+                  <input type="radio" name="agencia"  ng-model="$parent.form.Agency" ng-value="agencia" required/>
+                  {{agencia.ProfileOrganizationNumber}}, {{agencia.Address1}}<br>
+                  <!--div innerHtml="{{agencia.Description}}">{{agencia.Description}}</div-->          
+              </span>
+              </div>
+              
+              <br><br>
+            </div>
+          </div>
+          <!--- amount -->
+           
+           <br>
+           <p ng-show="visible">{{respuesta}} </p>
+           <br>
+        </div>
+    </div>
+    <div class="PagerContainer">
+      <div class="w3-bar">
+        <button ng-click=prev() formnovalidate="formnovalidate" class="w3-button w3-left w3-light-grey">&laquo; Previous</button>
+        <button ng-click="myform.$valid && next()" class="w3-button w3-right w3-green">Next &raquo;</button>
+      </div>
+     </div>
+  </form>
+  
+  <!--           MAIN CONTENTE      -->

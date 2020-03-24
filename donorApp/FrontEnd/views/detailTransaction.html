@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h2>TRANSACCION {{SpecificRecord.TransactionNumber}}</h2>
+  </div>
+  <div class="modal-body">
+   <p>DateCreated: {{SpecificRecord.DateCreated | date}}</p>
+   <p>Status: Submitted</p>
+   <p>PaymentType: Cash  </p>
+   <p>Pledge:  {{SpecificRecord.PaymentAmount | currency}}</p>
+   <p>Total Annual Amount:  {{SpecificRecord.PaymentTotalValue | currency}}</p>
+  </div>
+  <div class="modal-header">
+    <h2>Charity Details</h2>
+  </div>
+  <div class="modal-body">
+    <p>CampaignName: {{SpecificRecord.CampaignName }}</p>
+    <p>CampaignId: {{SpecificRecord.CampaignId }}</p>
+   </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="ok()">Ok</button>
+  </div>

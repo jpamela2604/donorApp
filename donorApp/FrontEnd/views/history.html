@@ -1,0 +1,43 @@
+  <!--           MAIN CONTENTE      -->
+<form name="myform">
+    <div class="main" >
+        <div class="myform">
+            
+            <h2>Payment Details</h2>
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">DATE</th>
+                    <th scope="col">CAMPAIGN</th>
+                    <th scope="col">PLEDGE</th>
+                    <th scope="col">TOTAL</th>
+                  </tr>
+                </thead>
+                <tbody>                  
+                  <tr ng-repeat="record in Records"  ng-click=detail(record)>
+                    <td>{{ record.DateCreated | date}}</td>
+                    <td>{{ record.CampaignName }}</td>
+                    <td>{{ record.TransactionNumber}}</td>
+                    <td>{{ record.PaymentTotalValue  | currency }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+          
+             
+           <!--br>
+           <p ng-show="visible">{{respuesta}} </p>
+           <br>
+  
+           <ul class="pager">
+            <li class="previous"><a ng-click=prev() >Previous</a></li>
+            <li class="next"><a ng-click="Finish()" type="submit">Finish</a></li>
+          </ul-->
+          
+        </div>
+    </div>
+   
+  </form>
+  

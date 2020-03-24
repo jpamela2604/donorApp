@@ -1,0 +1,58 @@
+body {font-family: Arial, Helvetica, sans-serif; font-weight: normal}
+form {border: 3px solid #f1f1f1;}
+
+
+button:hover {
+  opacity: 0.8;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 3em 0 2em 0;
+}
+
+img.avatar {
+  width: 15%;
+}
+
+h1{
+    text-align: center;
+}
+
+h2{
+  background-color: #81a9e6;
+  padding: 0.5em 0em;
+  text-align: center;
+  color: #053F8A; 
+}
+
+.PagerContainer {
+  border-left: 3em;
+  border-right: 3em;
+}
+
+.form-group
+{
+  padding-left: 3.5em;
+  padding-right: 3.5em;
+  padding-top: 0.5em;
+}
+
+.alinear{
+  display: inline-block!important;
+}
+
+.amount-input{
+  width: 50%;
+}
+
+.ui-datepicker-calendar {  
+      display: none;
+}​
+  
+
+.list{
+  padding-left: 2em;
+  text-align: left;
+}
+
