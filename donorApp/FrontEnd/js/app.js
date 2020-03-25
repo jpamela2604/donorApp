@@ -1,2 +1,6 @@
-var app = angular.module('myApp', ['ngRoute','ui.bootstrap']); 
 
+        angular
+            .module('app', [
+                    'ngRoute',
+                    'ui.bootstrap'
+                ]); 

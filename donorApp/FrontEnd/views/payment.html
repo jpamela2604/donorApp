@@ -1,22 +1,22 @@
 <!--           MAIN CONTENTE      -->
 <form name="myform">
-  <div class="main" ng-controller="PaymentController">
-      <h2>{{PaymentTypeLabel}}</h2>
+  <div class="main" >
+      <h2>{{info.Data.PaymentTypeLabel}}</h2>
       <div class="myform">
-          <p>{{PaymentInstructions}}</p>
-          <p>{{PaymentQuestion}}</p>
+          <p>{{info.Data.PaymentInstructions}}</p>
+          <p>{{info.Data.PaymentQuestion}}</p>
           <!--- amount -->
           <div class="payments">
-            <span ng-repeat="pay in Pays" class="form-inline alinear" ng-model="form.checkAmount">
+            <span ng-repeat="pay in info.Data.AmountQuestions[0].AmountOptions" class="form-inline alinear" ng-model="form.checkAmount">
               <div ng-if="pay.AmountLabel!=''" >
-                <input type="radio" name="amount"  ng-model="$parent.$parent.form.checkAmount" ng-value="pay.Amount" />&nbsp <strong>{{pay.AmountLabel}}</strong>
+                <input type="radio" name="amount"  ng-model="info.form.checkAmount" ng-value="pay.Amount" />&nbsp <strong>{{pay.AmountLabel}}</strong>
                 &nbsp &nbsp &nbsp
               </div>
               <div ng-if="pay.AmountLabel==''">
              
-                  <input type="radio" name="amount"     ng-value="pay.AmountLabel" required/>
+                  <input type="radio" name="amount"     ng-value="pay.AmountLabel" ng-required="true"/>
                   &nbsp<strong>$</strong>
-                  <input type="number" class="amount-input"  placeholder=""  ng-model="$parent.$parent.form.checkAmount" class="form-control" />
+                  <input type="number" class="amount-input"  placeholder=""  ng-model="info.form.checkAmount" class="form-control" />
                               
               </div>
             </span>
@@ -25,19 +25,19 @@
          <!--- frecuency -->
          <br>
          <br>
-         <p>{{FrequencyInstructions}}</p>
+         <p>{{info.Data.FrequencyInstructions}}</p>
 
 
          <div class="payments" >
-           <span ng-repeat="pay in FrequencyTypeList" class="form-inline alinear"  ng-model="form.frequency">
-             <input type="radio" name="frequency" ng-model="$parent.form.frequency"   ng-value="pay.value" required/>&nbsp<strong>{{pay.description}} &nbsp &nbsp &nbsp &nbsp </strong>
+           <span ng-repeat="pay in info.FrequencyTypeList" class="form-inline alinear"  ng-model="form.frequency">
+             <input type="radio" name="frequency" ng-model="info.frequency"   ng-value="pay.value" ng-required="true"/>&nbsp<strong>{{pay.description}} &nbsp &nbsp &nbsp &nbsp </strong>
            &nbsp &nbsp &nbsp
            </span>              
          </div>
          
          <!--- frecuency -->
          <br>
-         <p ng-show="visible">{{respuesta}} </p>
+         <p ng-show="info.messageVisibility">{{info.message}} </p>
          <br>
 
          
@@ -49,8 +49,8 @@
 
  <div class="PagerContainer">
   <div class="w3-bar">
-    <button ng-click=prev() formnovalidate="formnovalidate" class="w3-button w3-left w3-light-grey">&laquo; Previous</button>
-    <button ng-click="myform.$valid && next()" class="w3-button w3-right w3-green">Next &raquo;</button>
+    <button ng-click="info.prev()" formnovalidate="formnovalidate" class="w3-button w3-left w3-light-grey">&laquo; Previous</button>
+    <button ng-click="myform.$valid && info.next()" class="w3-button w3-right w3-green">Next &raquo;</button>
   </div>
  </div>
   

@@ -15,7 +15,7 @@
                   </tr>
                 </thead>
                 <tbody>                  
-                  <tr ng-repeat="record in Records"  ng-click=detail(record)>
+                  <tr ng-repeat="record in info.Data.PledgeList"  ng-click=info.detail(record)>
                     <td>{{ record.DateCreated | date}}</td>
                     <td>{{ record.CampaignName }}</td>
                     <td>{{ record.TransactionNumber}}</td>
@@ -25,16 +25,6 @@
               </table>
             </div>
             
-          
-             
-           <!--br>
-           <p ng-show="visible">{{respuesta}} </p>
-           <br>
-  
-           <ul class="pager">
-            <li class="previous"><a ng-click=prev() >Previous</a></li>
-            <li class="next"><a ng-click="Finish()" type="submit">Finish</a></li>
-          </ul-->
           
         </div>
     </div>

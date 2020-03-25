@@ -1,43 +1,31 @@
 (function() {
     'use strict';
 
-    app
+    angular
+        .module('app')
         .controller('AgencyController', AgencyController);
 
-    AgencyController.$inject = ['$scope', 'ApiServices','$location'];
+    AgencyController.$inject = [ 'ApiServices','$location','ApiPrepAgency'];
 
-    function AgencyController($scope, ApiServices,$location) {
-
+    function AgencyController( ApiServices,$location,ApiPrepAgency) {
+        var vm = this;
         // fill form
-        $scope.form=ApiServices.paymentValues;
-        ApiServices.IntroductoryPanel().then(function(data) {
-            $scope.PanelTitle = data.data.Data.PanelTitle;
-            $scope.Agencias = data.data.Data.PanelItemList;
-        });
-
-        
-
+        vm.form=ApiServices.paymentValues;
+        vm.Data = ApiPrepAgency.data.Data;
         
         // prev y continue button methods
-
-        $scope.prev = function() {
-            $location.path('adress');
-        }
-        $scope.next = function() {
-            //            console.log($scope.form);
-            /*console.log($scope.form.checkAmount)
-            console.log($scope.form.Agency.MinimumDonation)*/
-            if($scope.form.checkAmount<$scope.form.Agency.MinimumDonation)
-            {
-                $scope.respuesta = 'Amount of donation is not enough';
-                $scope.visible = true;
-            }else
-            {
-                /*console.log($scope.form);
-                console.log($scope.form.Agency);*/
-                $scope.visible = false;
+        vm.next = function() {
+            if(vm.form.checkAmount<vm.form.Agency.MinimumDonation){
+                vm.message = 'Amount of donation is not enough';
+                vm.messageVisibility = true;
+            }else{
+                vm.messageVisibility = false;
                 $location.path('sumary');
             }
         }
+        vm.prev = function() {
+            $location.path('adress');
+        }
+        
     }
 })();

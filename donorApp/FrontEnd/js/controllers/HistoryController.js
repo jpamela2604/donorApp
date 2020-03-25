@@ -1,28 +1,26 @@
 (function() {
     'use strict';
 
-    app
+    angular
+        .module('app')
         .controller('HistoryController', HistoryController);
 
-    HistoryController.$inject = ['$scope', 'ApiServices','$uibModal'];
+    HistoryController.$inject = [ 'ApiServices','$uibModal','ApiPrepHistory'];
 
-    function HistoryController($scope, ApiServices,$uibModal) {
+    function HistoryController( ApiServices,$uibModal,ApiPrepHistory) {
+        var vm = this;
         /* fill data */
-        $scope.form=ApiServices.paymentValues;
-        ApiServices.GivingHistory().then(function(data) {
-            if (data.status == 200) {
-                $scope.Records= data.data.Data.PledgeList;
-            }
-        });
+        vm.Data = ApiPrepHistory.data.Data;
+        vm.form=ApiServices.paymentValues;
+        
         /* detail method */
-        $scope.detail = function(record) {
+        vm.detail = function(record) {
             ApiServices.SpecificRecord=record;
             $uibModal.open({
                 templateUrl: "views/detailTransaction.html",
-                controller: "DetailTransactionController",
+                controller: "DetailTransactionController as info",
                 size: '',
             });
-            console.log(record)
         }
     }
 })();

@@ -1,57 +1,48 @@
 (function() {
   'use strict';
 
-  app
+  angular
+      .module('app')
       .controller('PaymentController', PaymentController);
 
-  PaymentController.$inject = ['$scope', '$location', 'ApiServices'];
+  PaymentController.$inject = [ '$location', 'ApiServices','ApiPrepConfig'];
 
 
 
-  function PaymentController($scope, $location, ApiServices) {
-
+  function PaymentController( $location, ApiServices,ApiPrepConfig) {
+      var vm = this;
       // fill form  
-      ApiServices.PaymentTypeConfiguration().then(function(data) {
-          if (data.status == 200) {
-              $scope.PaymentTypeLabel = data.data.Data.PaymentTypeLabel;
-              $scope.PaymentInstructions = data.data.Data.PaymentInstructions;
-              $scope.PaymentQuestion = data.data.Data.PaymentQuestion;
-              $scope.Pays = data.data.Data.AmountQuestions[0].AmountOptions;
-              $scope.FrequencyInstructions = data.data.Data.FrequencyInstructions;
-              $scope.FrequencyTypeList = [{
-                value: 1,
-                description: "One-time"
-                },
-                {
-                    value: 2,
-                    description: "Monthly"
-                },
-                {
-                    value: 3,
-                    description: "Quarterly"
-                },
-                {
-                    value: 4,
-                    description: "Semi-annual"
-                }
-            ];
-             $scope.form=ApiServices.paymentValues;
-             $scope.MinimumDonationAmount = data.data.Data.MinimumDonationAmount;
-             $scope.form.PaymentType=data.data.Data.PaymentTypeLabel;
-          }
-
-      });
-      
-     // continue button method
-      $scope.next = function() {
-        if($scope.form.checkAmount<=0||$scope.form.checkAmount<$scope.MinimumDonationAmount)
+      vm.Data = ApiPrepConfig.data.Data;
+      vm.form=ApiServices.paymentValues;
+      vm.form.PaymentType=vm.Data.PaymentTypeLabel;
+      vm.FrequencyTypeList = [{
+        value: 1,
+        description: "One-time"
+        },
         {
-            $scope.respuesta = 'Amount of donation is not enough';
-            $scope.visible = true;
+            value: 2,
+            description: "Monthly"
+        },
+        {
+            value: 3,
+            description: "Quarterly"
+        },
+        {
+            value: 4,
+            description: "Semi-annual"
+        }
+    ];
+    
+     // continue button method
+     vm.next = function() {
+        if(vm.form.checkAmount<=0||vm.form.checkAmount<vm.Data.MinimumDonationAmount)
+        {
+            vm.message = 'Amount of donation is not enough';
+            vm.messageVisibility = true;
         }else
         {
             $location.path('card');
-            $scope.visible = false;
+            vm.messageVisibility = false;
         }
           
       }

@@ -1,32 +1,30 @@
 (function() {
     'use strict';
 
-    app
+    angular
+        .module('app')
         .controller('AdressController', AdressController);
 
-    AdressController.$inject = ['$scope', '$location', 'ApiServices'];
+    AdressController.$inject = ['$location', 
+                                'ApiServices',
+                                'ApiPrepCountry',
+                                'ApiPrepState'
+                            ];
 
-    function AdressController($scope,$location, ApiServices) {
-
+    function AdressController($location, ApiServices,ApiPrepCountry,ApiPrepState) {
+        var vm=this;
         // fill form
-        $scope.form=ApiServices.paymentValues;
-        ApiServices.Countries().then(function(data) {
-            $scope.contries = data.data.Data;
-        });
-
-        ApiServices.State().then(function(data) {
-            $scope.state = data.data.Data;
-        });
-
-    
+        vm.form=ApiServices.paymentValues;
+        vm.contries=ApiPrepCountry.data.Data;
+        vm.state=ApiPrepState.data.Data;
         
         // prev y continue button methods
 
-        $scope.prev = function() {
-            $location.path('card');
-        }
-        $scope.next = function() {
+        vm.next = function() {
             $location.path('agency');
+        }        
+        vm.prev = function() {
+            $location.path('card');
         }
     }
 })();

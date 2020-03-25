@@ -1,12 +1,23 @@
-app.controller('DetailTransactionController', function($scope, $uibModalInstance,ApiServices) {
-    
-    /* fill values */
-    $scope.SpecificRecord=ApiServices.SpecificRecord;
+(function() {
+  'use strict';
 
-    /* ok method */
-    $scope.ok = function(){
-      $uibModalInstance.close("Ok");
-    }
-     
+    angular
+    .module('app')
+    .controller('DetailTransactionController', DetailTransactionController);
     
-  });
+
+    DetailTransactionController.$inject = ['$uibModalInstance','ApiServices'];
+    
+    
+    function DetailTransactionController( $uibModalInstance,ApiServices){
+      var vm = this;
+      /* fill values */
+      vm.SpecificRecord=ApiServices.SpecificRecord;
+
+      /* ok method */
+      vm.ok = function(){
+        $uibModalInstance.close("Ok");
+      }     
+    
+  };
+})();

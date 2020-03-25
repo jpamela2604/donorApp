@@ -1,7 +1,8 @@
 (function() {
   'use strict';
 
-  app
+  angular
+      .module('app')
       .service('ApiServices', ApiServices);
 
   ApiServices.$inject = ['$http', 'url', 'apiKey'];
@@ -37,6 +38,28 @@
               });
       }
 
+      function Countries() {
+        return $http({
+                "method": "GET",
+                "url": url + "/api/Configuration/Countries",
+                "data": {},
+                "params": {
+                    "apikey": apiKey
+                },
+                "headers": {
+                    'Authorization': "Bearer " + this.appToken,
+                    'apiKey': apiKey
+                }
+            })
+            .then(function(data) {
+                return data;
+            })
+            .catch(function(err) {
+                console.log(err);
+                return err;
+            });
+     }
+
       function DonorAuthenticate(compaing, user, pass) {
           return $http({
                   "method": "GET",
@@ -63,74 +86,29 @@
 
       }
 
-      function Countries() {
-          return $http({
-                  "method": "GET",
-                  "url": url + "/api/Configuration/Countries",
-                  "data": {},
-                  "params": {
-                      "apikey": apiKey
-                  },
-                  "headers": {
-                      'Authorization': "Bearer " + this.appToken,
-                      'apiKey': apiKey
-                  }
-              })
-              .then(function(data) {
-                  return data;
-              })
-              .catch(function(err) {
-                  console.log(err);
-                  return err;
-              });
+      function GivingHistory(){
+        return $http({
+            "method": "GET",
+            "url": url + "/api/Donor/GivingHistory",
+            "data": {},
+            "params": {
+                "apikey": apiKey,
+                "donorToken": this.donorToken,
+                "paymentType": 2
+            },
+            "headers": {
+                'Authorization': "Bearer " + this.appToken,
+                'apiKey': apiKey
+            }
+        })
+        .then(function(data) {
+            return data;
+        })
+        .catch(function(err) {
+            console.log(err);
+            return err;
+        });
       }
-
-      function State() {
-          return $http({
-                  "method": "GET",
-                  "url": url + "/api/Configuration/USStates",
-                  "data": {},
-                  "params": {
-                      "apikey": apiKey
-                  },
-                  "headers": {
-                      'Authorization': "Bearer " + this.appToken,
-                      'apiKey': apiKey
-                  }
-              })
-              .then(function(data) {
-                  return data;
-              })
-              .catch(function(err) {
-                  console.log(err);
-                  return err;
-              });
-      }
-
-      function PaymentTypeConfiguration() {
-          return $http({
-                  "method": "GET",
-                  "url": url + "/api/Configuration/PaymentTypeConfiguration",
-                  "data": {},
-                  "params": {
-                      "apikey": apiKey,
-                      "donorToken": this.donorToken,
-                      "paymentType": 2
-                  },
-                  "headers": {
-                      'Authorization': "Bearer " + this.appToken,
-                      'apiKey': apiKey
-                  }
-              })
-              .then(function(data) {
-                  return data;
-              })
-              .catch(function(err) {
-                  console.log(err);
-                  return err;
-              });
-      }
-
       function IntroductoryPanel(){
         return $http({
             "method": "GET",
@@ -153,6 +131,29 @@
             return err;
         });
       }
+      function PaymentTypeConfiguration() {
+        return $http({
+                "method": "GET",
+                "url": url + "/api/Configuration/PaymentTypeConfiguration",
+                "data": {},
+                "params": {
+                    "apikey": apiKey,
+                    "donorToken": this.donorToken,
+                    "paymentType": 2
+                },
+                "headers": {
+                    'Authorization': "Bearer " + this.appToken,
+                    'apiKey': apiKey
+                }
+            })
+            .then(function(data) {
+                return data;
+            })
+            .catch(function(err) {
+                console.log(err);
+                return err;
+            });
+      }    
 
       function SaveDonation(amount,CFCAgencyId,cardtype,name,cardnumber,expiration,email,cardverificacion){
         return $http({
@@ -181,8 +182,8 @@
                     "DesignationWriteInList" : [],
                     "NegativeDesignation" : "",
                     "DesignationList" : [
-                      {
-                     
+                        {
+                    
                         "CFCAgencyId" : CFCAgencyId,
                         "DesignateableEntityType" : "", /* DesignateableEntityTypeCode.Code debe ser usado o  DesignateableEntityType, en caso que uno sea nulo, usar el otro*/
                         "DesignationId" : "",
@@ -198,7 +199,7 @@
                         "OrganizationNumber" : "",
                         "DesignationAmount" : amount,
                         "StandardAccountCode" : ""
-                      }
+                        }
                     ],
                     "PaymentIncreaseAmountType" : 1,
                     "PaymentIncreaseAmount" : 0,
@@ -211,7 +212,7 @@
                     "CustomField4" : expiration,
                     "CustomField5" : email,
                     "CustomField6" : cardverificacion
-                   }
+                    }
             },
             "headers": {
                 'Authorization': "Bearer " + this.appToken,
@@ -228,40 +229,38 @@
         });
       }
 
-      function GivingHistory(){
-        return $http({
-            "method": "GET",
-            "url": url + "/api/Donor/GivingHistory",
-            "data": {},
-            "params": {
-                "apikey": apiKey,
-                "donorToken": this.donorToken,
-                "paymentType": 2
-            },
-            "headers": {
-                'Authorization': "Bearer " + this.appToken,
-                'apiKey': apiKey
-            }
-        })
-        .then(function(data) {
-            return data;
-        })
-        .catch(function(err) {
-            console.log(err);
-            return err;
-        });
+      function State() {
+          return $http({
+                  "method": "GET",
+                  "url": url + "/api/Configuration/USStates",
+                  "data": {},
+                  "params": {
+                      "apikey": apiKey
+                  },
+                  "headers": {
+                      'Authorization': "Bearer " + this.appToken,
+                      'apiKey': apiKey
+                  }
+              })
+              .then(function(data) {
+                  return data;
+              })
+              .catch(function(err) {
+                  console.log(err);
+                  return err;
+              });
       }
-      
- 
+
 
       service.authApp = authApp;
-      service.DonorAuthenticate = DonorAuthenticate;
       service.Countries = Countries;
-      service.State = State;
-      service.PaymentTypeConfiguration = PaymentTypeConfiguration;
-      service.IntroductoryPanel=IntroductoryPanel;
-      service.SaveDonation=SaveDonation;
+      service.DonorAuthenticate = DonorAuthenticate;  
       service.GivingHistory=GivingHistory;
+      service.IntroductoryPanel=IntroductoryPanel;
+      service.PaymentTypeConfiguration = PaymentTypeConfiguration;
+      service.SaveDonation=SaveDonation;
+      service.State = State;
+      
 
       return service;
   }

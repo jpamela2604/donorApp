@@ -1,53 +1,52 @@
 (function() {
     'use strict';
     
-    app
+    angular
+        .module('app')
         .controller('SumaryController', SumaryController);
   
-    SumaryController.$inject = ['$scope', '$location', 'ApiServices','$uibModal','ValidationServices'];
+    SumaryController.$inject = [ '$location', 'ApiServices','$uibModal','ValidationServices'];
   
-    function SumaryController($scope, $location, ApiServices,$uibModal,ValidationServices) {
-        $scope.form=ApiServices.paymentValues;
-        $scope.form.TotalAnnualAmount=ValidationServices.TotalAnnaulAmount($scope.form.frequency,$scope.form.checkAmount);
+    function SumaryController( $location, ApiServices,$uibModal,ValidationServices) {
+        var vm = this;
+        //fill data
+        vm.form=ApiServices.paymentValues;
+        vm.form.TotalAnnualAmount=ValidationServices.TotalAnnaulAmount(vm.form.frequency,vm.form.checkAmount);
 
-        $scope.EditPayment = function() {
-           $location.path('payment');
-        }
-
-        $scope.EditCharity = function() {
+        //method of buttons
+        vm.EditCharity = function() {
             $location.path('agency');
         }
-        $scope.Finish = function() {
-           // $location.path('payment');            
+        vm.EditPayment = function() {
+           $location.path('payment');
+        }       
+        
+        vm.Finish = function() {            
 
-           ApiServices.SaveDonation($scope.form.Amount,
-            $scope.form.Agency.CFCAgencyId,
-            $scope.form.CreditCard.value,
-            $scope.form.Name,
-            $scope.form.CardNumber,
-            $scope.form.ExpirationDate,
-            $scope.form.EmailAdress,
-            $scope.form.VerificationNumber).then(function(data) {
+           ApiServices.SaveDonation(vm.form.Amount,
+            vm.form.Agency.CFCAgencyId,
+            vm.form.CreditCard.value,
+            vm.form.Name,
+            vm.form.CardNumber,
+            vm.form.ExpirationDate,
+            vm.form.EmailAdress,
+            vm.form.VerificationNumber).then(function(data) {
                 if (data.status == 200) {
-                    ApiServices.valor="Successfull transaction";
+                    ApiServices.message="Successfull transaction";
                 }else{
-                    ApiServices.valor="Fail transaction";
+                    ApiServices.message="Fail transaction";
                 }
                 $uibModal.open({
                     templateUrl: "views/modal.html",
-                    controller: "ModalController",
+                    controller: "ModalController as info",
                     size: '',
                   });
-                  
-                 /* modalInstance.result.then(function(response){
-                      $scope.result = `${response} button hitted`;
-                  });*/
             });
 
 
          }
  
-         $scope.prev = function() {
+         vm.prev = function() {
              $location.path('agency');
          }
     }

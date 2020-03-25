@@ -9,21 +9,21 @@
 
       <div class="form-group">
           <label>Compaing Code:</label>
-          <input class="form-control" ng-model="compaing" placeholder="Enter Compaing Code" required />
+          <input class="form-control" ng-model="main.compaing" placeholder="Enter Compaing Code" ng-required="true" />
       </div>
       <div class="form-group">
           <label>Username:</label>
-          <input class="form-control" ng-model="user" placeholder="Enter Username" required />
+          <input class="form-control" ng-model="main.user" placeholder="Enter Username" ng-required="true" />
       </div>
       <div class="form-group">
           <label>Password:</label>
-          <input type="password" class="form-control" ng-model="pass" placeholder="Enter Password" required />
+          <input type="password" class="form-control" ng-model="main.pass" placeholder="Enter Password" ng-required="true" />
       </div>
 
       <div class="text-center">
-          <input type="submit" class="btn btn-primary submit" ng-click="myform.$valid && log()" role="button" placeholder="Login" />
+          <input type="submit" class="btn btn-primary submit" ng-click="myform.$valid && main.log()" role="button" placeholder="Login" />
       </div>
-      <p ng-show="visible">{{respuesta}} </p>
+      <p ng-show="main.messageVisibility">{{main.message}} </p>
 
   </div>
 </form>

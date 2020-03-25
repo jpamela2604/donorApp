@@ -1,14 +1,31 @@
 (function() {
     'use strict';
   
-    app
+    angular
+        .module('app')
         .service('ValidationServices', ValidationServices);
   
-    ValidationServices.$inject = ['$http', 'url', 'apiKey'];
+    ValidationServices.$inject = [];
   
-    function ValidationServices($http, url, apiKey) {
+    function ValidationServices() {
         var service = this;
 
+        /* GET  TOTAL ANNUAL AMOUNT */
+
+        function TotalAnnaulAmount(Frecuency,amount){
+            let result=amount;
+            if(Frecuency==2)
+            {
+                result = result *12;
+            }else  if(Frecuency==3)
+            {
+                result = result *4;
+            }else if(Frecuency==4)
+            {
+                result = result *2;
+            }
+            return result;
+          }
         /* CARD VALIDATIONS */
        
         function ValidateCards(credit,number)
@@ -27,35 +44,18 @@
              return false;
           
         }
-        /* GET  TOTAL ANNUAL AMOUNT */
-
-        function TotalAnnaulAmount(Frecuency,amount){
-          let result=amount;
-          if(Frecuency==2)
-          {
-              result = result *12;
-          }else  if(Frecuency==3)
-          {
-              result = result *4;
-          }else if(Frecuency==4)
-          {
-              result = result *2;
-          }
-          return result;
-        }
-        /* VALIDATE DATE CREDIT CARD */
+         /* VALIDATE DATE CREDIT CARD */
         function ValidateDate(fecha){
-          let myDate = new Date(fecha);
-          let today = new Date();
-          if ( myDate > today ) { 
-              return true;
-          }
-          return false;
+            let myDate = new Date(fecha);
+            let today = new Date();
+            if ( myDate > today ) { 
+                return true;
+            }
+            return false;
         }
-  
-        
-        service.ValidateCards=ValidateCards;
+                
         service.TotalAnnaulAmount=TotalAnnaulAmount;
+        service.ValidateCards=ValidateCards;
         service.ValidateDate=ValidateDate;
   
         return service;

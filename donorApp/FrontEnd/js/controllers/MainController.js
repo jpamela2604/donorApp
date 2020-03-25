@@ -1,30 +1,34 @@
 (function() {
   'use strict';
 
-  app
+  angular
+      .module('app')
       .controller('MainController', MainController);
 
-  MainController.$inject = ['$scope', '$location', 'ApiServices'];
+  MainController.$inject = [ '$location', 'ApiServices'];
 
-  function MainController($scope, $location, ApiServices) {
-    $scope.form=ApiServices.paymentValues;
-      $scope.log = async function() {
+  function MainController( $location, ApiServices) {
+    var vm = this;
+    vm.form=ApiServices.paymentValues;
+    
+    vm.log = async function() {
+        
           ApiServices.authApp().then(function(data) {
               if(data.status == 200) {
                 ApiServices.appToken = data.data;
-                ApiServices.DonorAuthenticate(/*$scope.compaing*/"sp25camp1", $scope.user, $scope.pass).then(function(data2) {
+                ApiServices.DonorAuthenticate(/*$scope.compaing*/"sp25camp1",vm.user, vm.pass).then(function(data2) {
                     if (data2.status == 200) {
                         ApiServices.donorToken = data2.data.Data.DonorToken;
-                        $scope.form.compaing=$scope.compaing;
+                        vm.form.compaing=vm.compaing;
                         $location.path('payment');
                     } else {
-                        $scope.respuesta = 'Invalid user/password';
-                        $scope.visible = true;
+                        vm.message = 'Invalid user/password';
+                        vm.messageVisibility = true;
                     }
                 });
              }else {
-                $scope.respuesta = 'Invalid user/password';
-                $scope.visible = true;
+                vm.message = 'Invalid user/password';
+                vm.messageVisibility = true;
             }
           });
       }

@@ -1,12 +1,24 @@
-app.controller('ModalController', function($scope, $location, $uibModalInstance,ApiServices) {
-    $scope.respuesta=ApiServices.valor;
-    $scope.ok = function(){
-      $uibModalInstance.close("Ok");
-      $location.path('history');
-    }
+
+(function() {
+  'use strict';
+
+  angular
+      .module('app')
+      .controller('ModalController', ModalController);
+   
+    ModalController.$inject = [ '$location', '$uibModalInstance','ApiServices'];
+    function ModalController( $location, $uibModalInstance,ApiServices) { 
+      var vm = this;
+      vm.message=ApiServices.message;
+      
+      vm.ok = function(){
+        $uibModalInstance.close("Ok");
+        $location.path('history');
+      }
      
-    $scope.cancel = function(){
-      $uibModalInstance.dismiss();
-    } 
+      vm.cancel = function(){
+        $uibModalInstance.dismiss();
+      } 
     
-  });
+  };
+})();
