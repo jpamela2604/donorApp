@@ -10,13 +10,15 @@
     function ModalController( $location, $uibModalInstance,ApiServices) { 
       var vm = this;
       vm.message=ApiServices.message;
-      
-      vm.ok = function(){
+      vm.ok = ok;
+      vm.cancel = cancel;
+
+      function ok(){
         $uibModalInstance.close("Ok");
         $location.path('history');
       }
      
-      vm.cancel = function(){
+      function cancel(){
         $uibModalInstance.dismiss();
       } 
     

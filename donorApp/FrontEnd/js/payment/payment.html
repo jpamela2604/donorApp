@@ -30,7 +30,7 @@
 
          <div class="payments" >
            <span ng-repeat="pay in info.FrequencyTypeList" class="form-inline alinear"  ng-model="form.frequency">
-             <input type="radio" name="frequency" ng-model="info.frequency"   ng-value="pay.value" ng-required="true"/>&nbsp<strong>{{pay.description}} &nbsp &nbsp &nbsp &nbsp </strong>
+             <input type="radio" name="frequency" ng-model="info.form.frequency"   ng-value="pay.value" ng-required="true"/>&nbsp<strong>{{pay.description}} &nbsp &nbsp &nbsp &nbsp </strong>
            &nbsp &nbsp &nbsp
            </span>              
          </div>

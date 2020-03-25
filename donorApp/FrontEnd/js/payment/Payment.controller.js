@@ -34,7 +34,8 @@
     ];
     
      // continue button method
-     vm.next = function() {
+    vm.next = next;
+    function next() {
         if(vm.form.checkAmount<=0||vm.form.checkAmount<vm.Data.MinimumDonationAmount)
         {
             vm.message = 'Amount of donation is not enough';
@@ -46,6 +47,6 @@
         }
           
       }
-  }
+    }
 
 })();

@@ -6,11 +6,11 @@ angular
     $routeProvider 
         .when('/', { 
             controller: 'MainController as main', 
-            templateUrl: 'views/login.html' 
+            templateUrl: 'js/login/login.html' 
         }) 
         .when('/payment', { 
             controller: 'PaymentController as info', 
-            templateUrl: 'views/payment.html' ,
+            templateUrl: 'js/payment/payment.html' ,
             resolve:{
                 ApiPrepConfig:function(ApiServices)
                 {
@@ -20,11 +20,11 @@ angular
         }) 
         .when('/card', { 
             controller: 'CardController as info', 
-            templateUrl: 'views/card.html' 
+            templateUrl: 'js/card/card.html' 
         }) 
         .when('/adress', { 
             controller: 'AdressController as info', 
-            templateUrl: 'views/adress.html',
+            templateUrl: 'js/adress/adress.html',
             resolve:{
                 ApiPrepCountry:function(ApiServices)
                 {
@@ -38,7 +38,7 @@ angular
         }) 
         .when('/agency', { 
             controller: 'AgencyController as info', 
-            templateUrl: 'views/agency.html' ,
+            templateUrl: 'js/agency/agency.html' ,
             resolve:{
                 ApiPrepAgency:function(ApiServices)
                 {
@@ -48,11 +48,11 @@ angular
         }) 
         .when('/sumary', { 
             controller: 'SumaryController as info', 
-            templateUrl: 'views/sumary.html' 
+            templateUrl: 'js/sumary/sumary.html' 
         }) 
         .when('/history', { 
             controller: 'HistoryController as info', 
-            templateUrl: 'views/history.html',
+            templateUrl: 'js/history/history.html',
             resolve:{
                 ApiPrepHistory:function(ApiServices)
                 {

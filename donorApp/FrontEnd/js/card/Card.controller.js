@@ -36,7 +36,9 @@
        
 
         // prev y continue button methods
-        vm.next = function() {
+        vm.next = next;
+        vm.prev = prev;
+        function next() {
             if (!ValidationServices.ValidateCards(vm.form.CreditCard.value, vm.form.CardNumber)) {
                 vm.message = 'Invalid Card Number';
                 vm.messageVisibility = true;
@@ -55,7 +57,7 @@
             }
         }
 
-        vm.prev = function() {
+        function prev() {
             $location.path('payment');
         }
 

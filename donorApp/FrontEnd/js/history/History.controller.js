@@ -14,10 +14,12 @@
         vm.form=ApiServices.paymentValues;
         
         /* detail method */
-        vm.detail = function(record) {
+        vm.detail = detail;
+
+        function detail(record) {
             ApiServices.SpecificRecord=record;
             $uibModal.open({
-                templateUrl: "views/detailTransaction.html",
+                templateUrl: "js/history/detailTransaction.html",
                 controller: "DetailTransactionController as info",
                 size: '',
             });

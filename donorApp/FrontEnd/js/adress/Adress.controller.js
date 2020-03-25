@@ -20,10 +20,14 @@
         
         // prev y continue button methods
 
-        vm.next = function() {
+        vm.next = next;
+        vm.prev = prev;
+
+        function next () {
             $location.path('agency');
         }        
-        vm.prev = function() {
+               
+        function prev()  {
             $location.path('card');
         }
     }

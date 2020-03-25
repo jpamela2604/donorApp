@@ -14,14 +14,20 @@
         vm.form.TotalAnnualAmount=ValidationServices.TotalAnnaulAmount(vm.form.frequency,vm.form.checkAmount);
 
         //method of buttons
-        vm.EditCharity = function() {
+        vm.EditCharity = EditCharity;
+        vm.EditPayment = EditPayment;
+        vm.Finish = Finish;
+        vm.prev = prev;
+
+        function EditCharity() {
             $location.path('agency');
         }
-        vm.EditPayment = function() {
+        
+        function EditPayment() {
            $location.path('payment');
         }       
         
-        vm.Finish = function() {            
+        function Finish() {            
 
            ApiServices.SaveDonation(vm.form.Amount,
             vm.form.Agency.CFCAgencyId,
@@ -37,7 +43,7 @@
                     ApiServices.message="Fail transaction";
                 }
                 $uibModal.open({
-                    templateUrl: "views/modal.html",
+                    templateUrl: "js/sumary/modal.html",
                     controller: "ModalController as info",
                     size: '',
                   });
@@ -46,7 +52,7 @@
 
          }
  
-         vm.prev = function() {
+         function prev() {
              $location.path('agency');
          }
     }

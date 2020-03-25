@@ -15,7 +15,8 @@
       vm.SpecificRecord=ApiServices.SpecificRecord;
 
       /* ok method */
-      vm.ok = function(){
+      vm.ok = ok;
+      function ok(){
         $uibModalInstance.close("Ok");
       }     
     
