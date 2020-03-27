@@ -5,9 +5,9 @@
       .module('app')
       .service('ApiServices', ApiServices);
 
-  ApiServices.$inject = ['$http', 'url', 'apiKey'];
+  ApiServices.$inject = ['apiRepository'];
 
-  function ApiServices($http, url, apiKey) {
+  function ApiServices(apiRepository) {
       var service = this;
       service.appToken = "";
       service.donorToken = "";
@@ -19,238 +19,61 @@
       /* API QUERIES */
 
       function authApp() {
-          return $http({
-                  "method": "GET",
-                  "url": url + "/api/Application/Authenticate",
-                  "data": {},
-                  "params": {
-                      "apikey": apiKey
-                  },
-                  "headers": {
-                      'Authorization': "Basic QVBJVXNlci1UZXN0OkFQSVVzZXItVGVzdA=="
-                  }
-              })
-              .then(function(data) {
-                  return data;
-              })
-              .catch(function(err) {
-                  console.log(err);
-                  return err;
-              });
-      }
-
+        return apiRepository.authApp()
+                  .then(function (response){
+                      return response;
+                  });
+         
+        }
       function Countries() {
-        return $http({
-                "method": "GET",
-                "url": url + "/api/Configuration/Countries",
-                "data": {},
-                "params": {
-                    "apikey": apiKey
-                },
-                "headers": {
-                    'Authorization': "Bearer " + this.appToken,
-                    'apiKey': apiKey
-                }
-            })
-            .then(function(data) {
-                return data;
-            })
-            .catch(function(err) {
-                console.log(err);
-                return err;
-            });
+        return apiRepository.Countries(this.appToken)
+                  .then(function (response){
+                      return response;
+                  });
      }
 
-      function DonorAuthenticate(compaing, user, pass) {
-          return $http({
-                  "method": "GET",
-                  "url": url + "/api/Donor/Authenticate",
-                  "data": {},
-                  "params": {
-                      "apikey": apiKey,
-                      "campaignCode": compaing,
-                      "username": user,
-                      "password": pass
-                  },
-                  "headers": {
-                      'Authorization': "Bearer " + this.appToken,
-                      'apiKey': apiKey
-                  }
-              })
-              .then(function(data) {
-                  return data;
-              })
-              .catch(function(err) {
-                  console.log(err);
-                  return err;
-              });
+      function DonorAuthenticate(compaing, user, pass) {         
+              return apiRepository.DonorAuthenticate(compaing, user, pass,this.appToken)
+                  .then(function (response){
+                      return response;
+                  });
 
       }
 
       function GivingHistory(){
-        return $http({
-            "method": "GET",
-            "url": url + "/api/Donor/GivingHistory",
-            "data": {},
-            "params": {
-                "apikey": apiKey,
-                "donorToken": this.donorToken,
-                "paymentType": 2
-            },
-            "headers": {
-                'Authorization': "Bearer " + this.appToken,
-                'apiKey': apiKey
-            }
-        })
-        .then(function(data) {
-            return data;
-        })
-        .catch(function(err) {
-            console.log(err);
-            return err;
-        });
+        return apiRepository.GivingHistory(this.donorToken,this.appToken)
+        .then(function (response){
+              return response;
+          });
+
       }
       function IntroductoryPanel(){
-        return $http({
-            "method": "GET",
-            "url": url + "/api/Configuration/IntroductoryPanel",
-            "data": {},
-            "params": {
-                "apikey": apiKey,
-                "donorToken": this.donorToken,
-            },
-            "headers": {
-                'Authorization': "Bearer " + this.appToken,
-                'apiKey': apiKey
-            }
-        })
-        .then(function(data) {
-            return data;
-        })
-        .catch(function(err) {
-            console.log(err);
-            return err;
+        return apiRepository.IntroductoryPanel(this.donorToken,this.appToken)
+        .then(function (response){
+            return response;
         });
       }
       function PaymentTypeConfiguration() {
-        return $http({
-                "method": "GET",
-                "url": url + "/api/Configuration/PaymentTypeConfiguration",
-                "data": {},
-                "params": {
-                    "apikey": apiKey,
-                    "donorToken": this.donorToken,
-                    "paymentType": 2
-                },
-                "headers": {
-                    'Authorization': "Bearer " + this.appToken,
-                    'apiKey': apiKey
-                }
-            })
-            .then(function(data) {
-               // service.myData=data;
-                return data;
-            })
-            .catch(function(err) {
-                console.log(err);
-                return err;
-            });
+            return apiRepository.PaymentTypeConfiguration(this.donorToken,this.appToken)
+                .then(function (response){
+                      return response;
+                  });
+
       }    
 
       function SaveDonation(amount,CFCAgencyId,cardtype,name,cardnumber,expiration,email,cardverificacion){
-        return $http({
-            "method": "GET",
-            "url": url + "/api/Donation/Save",
-            "data": {},
-            "params": {
-                "apikey": apiKey,
-                "donorToken": this.donorToken,
-                "pledges": {
-                    "CampaignId" : "ac58aac5-2baa-41a0-9395-898bcb939cda",
-                    "PledgeStatusType" : 0,
-                    "DonationSourceType" : 9,
-                    "Pa" : 2,
-                    "FrequencyType" : 1, 
-                    "PaymentAmountType" : 1,
-                    "PaymentTotalValue" : amount,
-                    "AddOnTotalValue" : 0,
-                    "PaymentAmount" : amount,
-                    "TotalValue" : amount,
-                    "Payment" : { 
-                    },
-                    "AddOnList" : [],
-                    "AddOnTotalList": [],
-                    "DesignationAmountType" : 1,
-                    "DesignationWriteInList" : [],
-                    "NegativeDesignation" : "",
-                    "DesignationList" : [
-                        {
-                    
-                        "CFCAgencyId" : CFCAgencyId,
-                        "DesignateableEntityType" : "", /* DesignateableEntityTypeCode.Code debe ser usado o  DesignateableEntityType, en caso que uno sea nulo, usar el otro*/
-                        "DesignationId" : "",
-                        "DisplayName" : "",
-                        "DistributionDesignationId" : "",
-                        "EIN": "",
-                        "EntityId" : "",
-                        "IsDefaultPanelItem" : false,
-                        "IsRejected" : false,
-                        "MinimumDonation" : "",
-                        "MinimumTotalDonationForDesignation" : "",
-                        "Name" : "",
-                        "OrganizationNumber" : "",
-                        "DesignationAmount" : amount,
-                        "StandardAccountCode" : ""
-                        }
-                    ],
-                    "PaymentIncreaseAmountType" : 1,
-                    "PaymentIncreaseAmount" : 0,
-                    "IsImpersonated" : false,
-                    "ImpersonatedUser" : "",
-                    "IsConfirmed" : true,
-                    "CustomField1" : cardtype,
-                    "CustomField2" : name,
-                    "CustomField3" : cardnumber,
-                    "CustomField4" : expiration,
-                    "CustomField5" : email,
-                    "CustomField6" : cardverificacion
-                    }
-            },
-            "headers": {
-                'Authorization': "Bearer " + this.appToken,
-                'apiKey': apiKey,
-                'Accept': 'application/json'
-            }
-        })
-        .then(function(data) {
-            return data;
-        })
-        .catch(function(err) {
-            console.log(err);
-            return err;
+        return apiRepository.SaveDonation(amount,CFCAgencyId,cardtype,name,
+            cardnumber,expiration,email,cardverificacion,this.donorToken,this.appToken)
+        .then(function (response){
+            return response;
         });
       }
 
       function State() {
-          return $http({
-                  "method": "GET",
-                  "url": url + "/api/Configuration/USStates",
-                  "data": {},
-                  "params": {
-                      "apikey": apiKey
-                  },
-                  "headers": {
-                      'Authorization': "Bearer " + this.appToken,
-                      'apiKey': apiKey
-                  }
-              })
-              .then(function(data) {
-                  return data;
-              })
-              .catch(function(err) {
-                  console.log(err);
-                  return err;
-              });
+        return apiRepository.State(this.appToken)
+        .then(function (response){
+            return response;
+        });
       }
 
 
