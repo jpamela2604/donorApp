@@ -10,7 +10,7 @@
   function MainController( $location, ApiServices) {
     var vm = this;
     vm.form=ApiServices.paymentValues;
-    
+    vm.alerts = [];
     vm.log = log;
 
     async function log()
@@ -24,16 +24,24 @@
                       vm.form.compaing=vm.compaing;
                       $location.path('payment');
                   } else {
-                      vm.message = 'Invalid user/password';
-                      vm.messageVisibility = true;
+                      addAlert('Invalid user/password');
                   }
               });
            }else {
-              vm.message = 'Invalid user/password';
-              vm.messageVisibility = true;
+            addAlert('Invalid user/password');
           }
         });
     }
+    // alert methods
+    vm.addAlert=addAlert;
+    vm.closeAlert=closeAlert;
+    function addAlert(message) {
+      vm.alerts.push({msg: message});
+    };
+  
+    function closeAlert(index) {
+        vm.alerts.splice(index, 1);
+    };
   }
 
 })();

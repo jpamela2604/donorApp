@@ -10,6 +10,7 @@
     function CardController( $location, ApiServices,ValidationServices) {
         var vm = this;
         // fill form
+        vm.alerts = [];
         vm.CreditCardTypeList = [{
             value: 1,
             description: "Visa"
@@ -35,24 +36,30 @@
         vm.PaymentTypeLabel = "Credit card label info";
        
 
-        // prev y continue button methods
+        // alert method and prev y continue button methods
+        vm.addAlert=addAlert;
+        vm.closeAlert=closeAlert;
         vm.next = next;
         vm.prev = prev;
+
+        function addAlert(message) {
+            vm.alerts.push({msg: message});
+          };
+        
+        function closeAlert(index) {
+            vm.alerts.splice(index, 1);
+        };
+
         function next() {
             if (!ValidationServices.ValidateCards(vm.form.CreditCard.value, vm.form.CardNumber)) {
-                vm.message = 'Invalid Card Number';
-                vm.messageVisibility = true;
+                addAlert('Invalid Card Number');
             } else if (String(vm.form.VerificationNumber).length != 3) {
-                vm.message = 'Invalid Verification Number';
-                vm.messageVisibility = true;
+                addAlert('Invalid Verification Number');
             } else if (!vm.form.Name.match(/^\w+\s\w+$/)) {
-                vm.message = 'Write first and last name';
-                vm.messageVisibility = true;
+                addAlert('Write first and last name');
             } else if(!ValidationServices.ValidateDate(vm.form.ExpirationDate)){
-                vm.message = 'Invalid date';
-                vm.messageVisibility = true;
+                addAlert('Invalid date');
             } else {
-                vm.messageVisibility = false;
                 $location.path('adress');
             }
         }

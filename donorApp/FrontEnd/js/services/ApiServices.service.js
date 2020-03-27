@@ -15,6 +15,7 @@
           Amount: 6,
           Frecuency: 2
       }
+      service.myData=[];
       /* API QUERIES */
 
       function authApp() {
@@ -147,6 +148,7 @@
                 }
             })
             .then(function(data) {
+               // service.myData=data;
                 return data;
             })
             .catch(function(err) {
@@ -260,7 +262,7 @@
       service.PaymentTypeConfiguration = PaymentTypeConfiguration;
       service.SaveDonation=SaveDonation;
       service.State = State;
-      
+      //service.myData=myData;
 
       return service;
   }

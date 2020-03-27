@@ -19,12 +19,19 @@ h1{
     text-align: center;
 }
 
+.panel-default > .panel-heading {
+  background-color: #95989c ;
+  text-align: left;
+  color: #053F8A; 
+}  
+
 h2{
-  background-color: #81a9e6;
+  background-color: #95989c;
   padding: 0.5em 0em;
   text-align: center;
   color: #053F8A; 
 }
+
 
 .PagerContainer {
   border-left: 3em;

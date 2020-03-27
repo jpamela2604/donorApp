@@ -23,7 +23,8 @@
       <div class="text-center">
           <input type="submit" class="btn btn-primary submit" ng-click="myform.$valid && main.log()" role="button" placeholder="Login" />
       </div>
-      <p ng-show="main.messageVisibility">{{main.message}} </p>
+      <div uib-alert  class="alert-warning" ng-repeat="alert in main.alerts" type="{{alert.type}}" close="main.closeAlert($index)">{{alert.msg}}</div>
+      <br><br>
 
   </div>
 </form>

@@ -1,6 +1,6 @@
-
-        angular
+   angular
             .module('app', [
-                    'ngRoute',
+                    //'ngRoute',
+                    'ui.router',
                     'ui.bootstrap'
                 ]); 

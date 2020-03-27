@@ -30,7 +30,9 @@
             <div class="form-group">
               <label >Contact Email Adress:</label>
               <input type="email" class="form-control" ng-model="info.form.EmailAdress" id="email" placeholder="Contact Email Adress" name="email"/>
-              <p ng-show="info.messageVisibility">{{info.message}} </p>
+              <div uib-alert  class="alert-warning" ng-repeat="alert in info.alerts" type="{{alert.type}}" close="info.closeAlert($index)">{{alert.msg}}</div>
+              <br>
+              <br>
             </div>          
             
         </div>

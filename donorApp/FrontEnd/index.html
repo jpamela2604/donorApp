@@ -4,9 +4,17 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    
+    <!-- route ---------- >
+      <script src="//npmcdn.com/@uirouter/angularjs@1.0.5/release/angular-ui-router.js"></script-->
     <script src="https://code.angularjs.org/1.6.0/angular-route.min.js"></script>
+    <script src="//unpkg.com/@uirouter/angularjs@1.0.5/release/angular-ui-router.js"></script>
+
+
+
+     <!-- route ------------>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -18,22 +26,25 @@
 
   <link data-require="bootstrap@3.3.7" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link data-require="bootstrap-css@3.*" data-semver="3.3.7" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" />
-    <script data-require="angular.js@1.6.5" data-semver="1.6.5" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
-    <script data-require="angular-animate@1.6.*" data-semver="1.6.5" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
+   <script data-require="angular-animate@1.6.*" data-semver="1.6.5" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
     <script data-require="angular-touch@1.6.*" data-semver="1.6.2" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular-touch.js"></script>
     <script data-require="ui-bootstrap@*" data-semver="2.5.0" src="https://cdn.rawgit.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-2.5.0.js"></script> 
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+    <link href="css/style.css" rel="stylesheet" type="text/css">
   </head>
 
-<body ng-app="app">
-
+<body ng-app="app"> 
   <div class="container container-fluid text-center"> 
     <div class="container-fluid ">
       <div class="row content">
       
         <div class="col-sm-12 col-md-8 col-md-offset-2  col-xs-12 col-12 " > 
+           <!-- route ---------- >
             <div ng-view>
-            </div>
+            </div-->
+            <ui-view></ui-view>
+           <!-- route ------------>
         </div>
         <div class=" col-md-offset-2 sidenav">
         </div>
@@ -51,19 +62,29 @@
     <script src="js/route.config.js"></script>
     <!-- Controllers -->
     <script src="js/login/Main.controller.js"></script>
-    <script src="js/payment/Payment.controller.js"></script>
+  
     <script src="js/card/Card.controller.js"></script>
-    <script src="js/adress/Adress.controller.js"></script>
-    <script src="js/agency/Agency.controller.js"></script>
+    
+
     <script src="js/sumary/Sumary.controller.js"></script>
     <script src="js/sumary/Modal.controller.js"></script>
-    <script src="js/history/History.controller.js"></script>
-    <script src="js/history/DetailTransaction.controller.js"></script>
-    <!-- Directives -->
 
+    <script src="js/history/DetailTransaction.controller.js"></script>
     <!-- Services -->
     <script src="js/services/ApiServices.service.js"></script>
     <script src="js/services/ValidationServices.service.js"></script>
+    <!-- Directives -->
+
+    <!-- Components -->
+    <script src="js/login/Login.component.js"></script>
+    <script src="js/payment/payment.component.js"></script>
+    <script src="js/card/Card.component.js"></script>
+    <script src="js/adress/Adress.component.js"></script>
+    <script src="js/agency/Agency.component.js"></script>
+    <script src="js/sumary/sumary.component.js"></script>
+    <script src="js/history/history.component.js"></script>
+    <!--script src="js/card/Card.component.js"></script-->
+    
 </body>
 
 </html>

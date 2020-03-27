@@ -1,18 +1,22 @@
-(function() {
+/*(function() {
   'use strict';
 
   angular
       .module('app')
       .controller('PaymentController', PaymentController);
 
-  PaymentController.$inject = [ '$location', 'ApiServices','ApiPrepConfig'];
+  PaymentController.$inject = [ '$location', 'ApiServices'/*,'ApiPrepConfig'*///];
 
 
-
+/*
   function PaymentController( $location, ApiServices,ApiPrepConfig) {
       var vm = this;
+      console.log(this)
+      console.log(ApiPrepConfig)
       // fill form  
-      vm.Data = ApiPrepConfig.data.Data;
+      vm.alerts = [];
+      //vm.Data = ApiPrepConfig.data.Data;
+      vm.Data =ApiServices.myData.data.Data;
       vm.form=ApiServices.paymentValues;
       vm.form.PaymentType=vm.Data.PaymentTypeLabel;
       vm.FrequencyTypeList = [{
@@ -33,20 +37,28 @@
         }
     ];
     
-     // continue button method
+     // continue button method    
+    vm.addAlert=addAlert;
+    vm.closeAlert=closeAlert;
     vm.next = next;
+    function addAlert(message) {
+        vm.alerts.push({msg: message});
+      };
+    
+    function closeAlert(index) {
+        vm.alerts.splice(index, 1);
+    };
+
     function next() {
         if(vm.form.checkAmount<=0||vm.form.checkAmount<vm.Data.MinimumDonationAmount)
         {
-            vm.message = 'Amount of donation is not enough';
-            vm.messageVisibility = true;
+            addAlert('Amount of donation is not enough');
         }else
         {
             $location.path('card');
-            vm.messageVisibility = false;
         }
           
       }
     }
 
-})();
+})();*/

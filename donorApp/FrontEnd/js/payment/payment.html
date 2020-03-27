@@ -37,9 +37,10 @@
          
          <!--- frecuency -->
          <br>
-         <p ng-show="info.messageVisibility">{{info.message}} </p>
+         <div uib-alert  class="alert-warning" ng-repeat="alert in info.alerts" type="{{alert.type}}" close="info.closeAlert($index)">{{alert.msg}}</div>
          <br>
-
+         <br>
+         <br>
          
 
          

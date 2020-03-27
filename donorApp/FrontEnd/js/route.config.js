@@ -1,66 +1,79 @@
 angular
       .module('app')
-      .config(function ($routeProvider, $locationProvider) { 
-    //$locationProvider.hashPrefix('');
-    $locationProvider.html5Mode({ enabled: true, requireBase: false });
-    $routeProvider 
-        .when('/', { 
-            controller: 'MainController as main', 
-            templateUrl: 'js/login/login.html' 
-        }) 
-        .when('/payment', { 
-            controller: 'PaymentController as info', 
-            templateUrl: 'js/payment/payment.html' ,
-            resolve:{
-                ApiPrepConfig:function(ApiServices)
-                {
-                    return ApiServices.PaymentTypeConfiguration();
+      .config(function($stateProvider, $locationProvider) {
+
+        $locationProvider.html5Mode({ enabled: true, requireBase: false });
+
+        var states = [            
+            {
+                name: 'login',
+                url: '/',
+                component: 'loginComponent'
+            },
+            {
+                
+                name: 'payment',
+                url: '/payment',
+                component: 'paymentComponent',    
+                resolve:{
+                    apiPrepConfig:['ApiServices',function(ApiServices)
+                    {
+                        return ApiServices.PaymentTypeConfiguration();
+                    }]
                 }
+            },
+            {
+                name: 'card',
+                url: '/card',
+                component: 'cardComponent',
+            },
+            {
+                name: 'adress',
+                url: '/adress',
+                component: 'adressComponent', 
+                resolve:{
+                    apiPrepCountry:['ApiServices',function(ApiServices)
+                    {
+                        return ApiServices.Countries();
+                    }],
+                    apiPrepState:['ApiServices',function(ApiServices)
+                    {
+                        return ApiServices.State();
+                    }],
+                }
+            },
+            {
+                name: 'agency',
+                url: '/agency',
+                component: 'agencyComponent', 
+                resolve:{                    
+                    apiPrepAgency:['ApiServices',function(ApiServices)
+                    {
+                        return ApiServices.IntroductoryPanel();
+                    }],
+                }
+            },
+            {
+                name: 'sumary',
+                url: '/sumary',
+                component: 'sumaryComponent'
+            },
+            {
+                name: 'history',
+                url: '/history',
+                component: 'historyComponent',                
+                resolve:{
+                    apiPrepHistory:['ApiServices',function(ApiServices)
+                    {
+                        return ApiServices.GivingHistory();
+                    }]
+                } 
             }
-        }) 
-        .when('/card', { 
-            controller: 'CardController as info', 
-            templateUrl: 'js/card/card.html' 
-        }) 
-        .when('/adress', { 
-            controller: 'AdressController as info', 
-            templateUrl: 'js/adress/adress.html',
-            resolve:{
-                ApiPrepCountry:function(ApiServices)
-                {
-                    return ApiServices.Countries();
-                },
-                ApiPrepState:function(ApiServices)
-                {
-                    return ApiServices.State();
-                }
-            }
-        }) 
-        .when('/agency', { 
-            controller: 'AgencyController as info', 
-            templateUrl: 'js/agency/agency.html' ,
-            resolve:{
-                ApiPrepAgency:function(ApiServices)
-                {
-                    return ApiServices.IntroductoryPanel();
-                }
-            }
-        }) 
-        .when('/sumary', { 
-            controller: 'SumaryController as info', 
-            templateUrl: 'js/sumary/sumary.html' 
-        }) 
-        .when('/history', { 
-            controller: 'HistoryController as info', 
-            templateUrl: 'js/history/history.html',
-            resolve:{
-                ApiPrepHistory:function(ApiServices)
-                {
-                    return ApiServices.GivingHistory();
-                }
-            } 
-        })
-        .otherwise({ 
-        redirectTo: '/' 
-        }); 
-    }); 
+
+        ];  
+       
+
+        states.forEach(function(state) {
+            $stateProvider.state(state);
+          });
+      });

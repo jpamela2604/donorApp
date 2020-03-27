@@ -1,4 +1,4 @@
-(function() {
+/*(function() {
     'use strict';
 
     angular
@@ -14,15 +14,17 @@
     function AdressController($location, ApiServices,ApiPrepCountry,ApiPrepState) {
         var vm=this;
         // fill form
+        
         vm.form=ApiServices.paymentValues;
         vm.contries=ApiPrepCountry.data.Data;
         vm.state=ApiPrepState.data.Data;
         
         // prev y continue button methods
-
+        
         vm.next = next;
         vm.prev = prev;
-
+        
+        
         function next () {
             $location.path('agency');
         }        
@@ -31,4 +33,4 @@
             $location.path('card');
         }
     }
-})();
+})();*/ 

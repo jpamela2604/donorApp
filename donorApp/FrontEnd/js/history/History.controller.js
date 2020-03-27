@@ -1,4 +1,4 @@
-(function() {
+/*(function() {
     'use strict';
 
     angular
@@ -10,11 +10,11 @@
     function HistoryController( ApiServices,$uibModal,ApiPrepHistory) {
         var vm = this;
         /* fill data */
-        vm.Data = ApiPrepHistory.data.Data;
+       /* vm.Data = ApiPrepHistory.data.Data;
         vm.form=ApiServices.paymentValues;
         
         /* detail method */
-        vm.detail = detail;
+ /*       vm.detail = detail;
 
         function detail(record) {
             ApiServices.SpecificRecord=record;
@@ -25,4 +25,4 @@
             });
         }
     }
-})();
+})();*/
